@@ -4,23 +4,17 @@ public class Romano {
 
 	public String cambiarARomano(String numero){
 		int NumeroNormal =Integer.parseInt(numero);
-		if(NumeroNormal>=4){
-			if(NumeroNormal==9)
-				return "IX";
-			if(NumeroNormal==4)
-				return "IV";
-			else
-				return "V".concat(sumarUnidades(NumeroNormal,6));//Para representer el 5 utilizamos V para los numeros siguientes (6,7,8) se representara sumando las unidades correspondientes
+		String Resultado="";
+		int Valores[]={1000,900,500,400,100,90,50,40,10,9,5,4,1};
+		String Romanos[]={"M","CM","D","CD","C","XC","L","XL","X","IX","V","IV","I"};
+		int i=0;
+			while(NumeroNormal>0){// si al restarle el numero no es igual a cero quiere decir que todavia nos falta encontrar su equivalente en el arreglo
+				while(NumeroNormal>=Valores[i]){// ciclo para contralar el valor correspondiente para el numero en el arreglo de Romanos
+					Resultado=Resultado+Romanos[i];//Añadimos el valor al resultado
+					NumeroNormal=NumeroNormal-Valores[i];//Restamos el valor al numero
+				}
+				i++;// Aumentamos el indice para buscar en el arreglo de Romanos el numero que le corresponde el numero
+			}
+		return Resultado;
 		}
-		return sumarUnidades(NumeroNormal,1);// para 1,2,3 podemos representar el numero sumando la unidad q correspoda
 	}
-	/*El metodo sumar unidades es utilizado para sumar las unidades en romano representado por I, el 
-	 metodo recibe los parametros numero(numero que se va convertir) y empieza, que el numero donde sumara  las unidadees necesarias para la correcta representacion */
-	public String sumarUnidades(int numero,int empieza){
-		String NumeroRomano="";
-		for(int i=empieza;i<=numero;i++){
-			NumeroRomano=NumeroRomano.concat("I");
-		}
-		return NumeroRomano;
-	}
-}
